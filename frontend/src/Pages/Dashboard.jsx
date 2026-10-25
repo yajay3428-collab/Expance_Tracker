@@ -25,7 +25,6 @@ import {
   DollarSign,
   TrendingUp as ProfitIcon,
   PieChart as PieChartIcon,
-  PieChart,
   PiggyBank,
   Plus,
   ShoppingCart,
@@ -35,7 +34,14 @@ import {
 } from "lucide-react";
 import FinancialCard from "../Components/FinancialCard";
 import GaugeCard from "../Components/GaugeCard";
-import { Cell, Legend, Pie, ResponsiveContainer, Tooltip } from "recharts";
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 import AddTransactionModal from "../Components/Add";
 
 const API_BASE = `${import.meta.env.VITE_API_URL || "http://localhost:4000"}/api`;
