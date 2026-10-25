@@ -101,10 +101,25 @@ const Dashboard = () => {
     category: "Food",
   });
 
-  const timeFrameRange = useMemo(
-    () => getTimeFrameRange(timeFrame),
-    [timeFrame],
-  );
+  const timeFrameRange = useMemo(() => {
+    const range = getTimeFrameRange(timeFrame);
+    // run till the end of the period (same as the server) so entries dated
+    // later in the same week/month are not dropped
+    const now = new Date();
+    let end;
+    if (timeFrame === "weekly") {
+      end = new Date(range.start);
+      end.setDate(end.getDate() + 6);
+    } else if (timeFrame === "monthly") {
+      end = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    } else if (timeFrame === "yearly") {
+      end = new Date(now.getFullYear(), 11, 31);
+    } else {
+      end = new Date(now);
+    }
+    end.setHours(23, 59, 59, 999);
+    return { ...range, end };
+  }, [timeFrame]);
   const prevTimeFrameRange = useMemo(
     () => getPreviousTimeFrameRange(timeFrame),
     [timeFrame],
@@ -209,10 +224,13 @@ const Dashboard = () => {
       Array.isArray(overviewMeta.expenseDistribution) &&
       overviewMeta.expenseDistribution.length > 0
     ) {
-      return overviewMeta.expenseDistribution.map((d) => ({
-        name: d.category,
-        value: Math.round(Number(d.amount) || 0),
-      }));
+      return overviewMeta.expenseDistribution
+        .map((d) => ({
+          name: d.category,
+          value: Math.round(Number(d.amount) || 0),
+        }))
+        .filter((d) => d.value > 0)
+        .sort((a, b) => b.value - a.value);
     }
 
     const categories = {};
@@ -223,10 +241,13 @@ const Dashboard = () => {
       }
     });
 
-    return Object.keys(categories).map((category) => ({
-      name: category,
-      value: Math.round(categories[category]),
-    }));
+    return Object.keys(categories)
+      .map((category) => ({
+        name: category,
+        value: Math.round(categories[category]),
+      }))
+      .filter((d) => d.value > 0)
+      .sort((a, b) => b.value - a.value);
     //console.log("Final chart data:", financialOverviewData);
   }, [filteredTransactions, overviewMeta, timeFrame]);
 
@@ -556,18 +577,26 @@ const Dashboard = () => {
         </div>
 
         <div className={dashboardStyles.pieChartHeight}>
+          {financialOverviewData.length === 0 ? (
+            <div className="h-full flex items-center justify-center text-sm text-gray-500">
+              No expenses in this period
+            </div>
+          ) : (
           <ResponsiveContainer width="100%" height="100%">
-            <PieChart className={chartStyles.pieChart}>
+            <PieChart
+              className={chartStyles.pieChart}
+              margin={{ top: 20, right: 40, bottom: 5, left: 40 }}
+            >
               <Pie
                 data={financialOverviewData}
                 cx="50%"
-                cy="50%"
-                innerRadius={70}
-                outerRadius={110}
-                paddingAngle={2}
+                cy="45%"
+                innerRadius={60}
+                outerRadius={95}
+                paddingAngle={financialOverviewData.length > 1 ? 2 : 0}
                 dataKey="value"
                 label={({ name, percent }) =>
-                  `${name}: ${Math.round(percent * 100)}%`
+                  percent >= 0.05 ? `${name}: ${Math.round(percent * 100)}%` : ""
                 }
                 labelLine={false}
               >
@@ -601,6 +630,7 @@ const Dashboard = () => {
               />
             </PieChart>
           </ResponsiveContainer>
+          )}
         </div>
       </div>
 

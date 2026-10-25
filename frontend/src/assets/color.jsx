@@ -30,7 +30,7 @@ export const GAUGE_COLORS = {
   }
 };
 
-export const COLORS = ['#0d9488', '#0f766e', '#0891b2', '#0e7490', '#f97316', '#ea580c', '#14b8a6'];
+export const COLORS = ['#0d9488', '#f97316', '#6366f1', '#ec4899', '#eab308', '#0ea5e9', '#22c55e', '#a855f7', '#ef4444', '#64748b'];
 
 export const INCOME_COLORS = [
   '#10b981', '#34d399', '#6ee7b7', '#a7f3d0', '#d1fae5'
