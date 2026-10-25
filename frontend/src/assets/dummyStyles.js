@@ -303,7 +303,6 @@ export const expensePageStyles = {
     "flex items-center gap-1 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg transition-all text-sm hover:shadow-md",
 
   // Additional empty state style
-  emptyStateSubtext: "text-sm text-gray-500 mt-2",
 
   // Timeframe positioning
   timeframePositioning:

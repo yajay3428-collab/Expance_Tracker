@@ -5,18 +5,27 @@ export async function getDashboardOverview(req, res) {
   const userId = req.user._id;
   const now = new Date();
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const endOfMonth = new Date(
+    now.getFullYear(),
+    now.getMonth() + 1,
+    0,
+    23,
+    59,
+    59,
+    999,
+  );
 
   try {
     const incomes = await incomeModel
       .find({
         userId,
-        date: { $gte: startOfMonth, $lte: now },
+        date: { $gte: startOfMonth, $lte: endOfMonth },
       })
       .lean();
     const expenses = await expenseModel
       .find({
         userId,
-        date: { $gte: startOfMonth, $lte: now },
+        date: { $gte: startOfMonth, $lte: endOfMonth },
       })
       .lean();
 

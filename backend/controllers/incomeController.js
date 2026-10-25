@@ -1,7 +1,6 @@
 import incomeModel from "../models/incomeModel.js";
 import XLSX from "xlsx";
 import getDateRange from "../utils/dataFilter.js";
-import { json } from "body-parser";
 
 // add income
 export async function addIncome(req, res) {
@@ -88,7 +87,10 @@ export async function updateIncome(req, res) {
 // to delete an income
 export async function deleteIncome(req, res) {
   try {
-    const income = await incomeModel.findOneAndDelete({ _id: req.params.id });
+    const income = await incomeModel.findOneAndDelete({
+      _id: req.params.id,
+      userId: req.user._id,
+    });
     if (!income) {
       return res.status(404).json({
         success: false,
@@ -123,8 +125,16 @@ export async function downloadIncomeExcel(req, res) {
     const worksheet = XLSX.utils.json_to_sheet(plainData);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "incomeModel");
-    XLSX.writeFile(workbook, "income_details.xlsx");
-    res.download("income_details.xlsx");
+    const buffer = XLSX.write(workbook, { type: "buffer", bookType: "xlsx" });
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    );
+    res.setHeader(
+      "Content-Disposition",
+      'attachment; filename="income_details.xlsx"',
+    );
+    res.send(buffer);
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -154,17 +164,16 @@ export async function getIncomeOverview(req, res) {
 
     const recentTransactions = incomes.slice(0, 9);
 
-    (res,
-      json({
-        success: true,
-        date: {
-          totalIncome,
-          averageIncome,
-          numberOfTransactions,
-          recentTransactions,
-          range,
-        },
-      }));
+    return res.status(200).json({
+      success: true,
+      data: {
+        totalIncome,
+        averageIncome,
+        numberOfTransactions,
+        recentTransactions,
+        range,
+      },
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({

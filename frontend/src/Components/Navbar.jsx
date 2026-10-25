@@ -14,7 +14,8 @@ const Navbar = ({ user: propUser, onLogout }) => {
   const menuRef = useRef();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const user = propUser || {
+  const [fetchedUser, setUser] = useState(null);
+  const user = propUser || fetchedUser || {
     name: "",
     email: "",
   };
@@ -23,7 +24,8 @@ const Navbar = ({ user: propUser, onLogout }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token =
+          localStorage.getItem("token") || sessionStorage.getItem("token");
         if (!token) return;
         const response = await axios.get(`${BASE_URL}/user/me`, {
           headers: { Authorization: `Bearer ${token}` },
