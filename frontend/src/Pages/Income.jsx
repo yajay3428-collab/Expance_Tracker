@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, useCallback } from "react";
 import { useOutletContext } from "react-router-dom";
 import {
   Plus,
-  DollarSign,
+  IndianRupee,
   Download,
   Eye,
   Calendar,
@@ -99,11 +99,11 @@ const IncomeChart = ({ chartData, timeFrame, timeFrameRange }) => (
             tickLine={false}
             tick={{ fill: "#6b7280", fontSize: 12 }}
             width={50}
-            tickFormatter={(value) => `$${value.toLocaleString()}`}
+            tickFormatter={(value) => `₹${value.toLocaleString("en-IN")}`}
           />
           <Tooltip
             formatter={(value) => [
-              `$${Math.round(value).toLocaleString()}`,
+              `₹${Math.round(value).toLocaleString("en-IN")}`,
               "Income",
             ]}
             contentStyle={styles.tooltipContent}
@@ -523,13 +523,13 @@ const IncomePage = () => {
         <FinancialCard
           icon={
             <div className={styles.iconGreen}>
-              <DollarSign
+              <IndianRupee
                 className={`w-4 h-4 md:w-5 md:h-5 ${styles.textGreen}`}
               />
             </div>
           }
           label="Total Income"
-          value={`$${Number(totalIncome || 0).toLocaleString()}`}
+          value={`₹${Number(totalIncome || 0).toLocaleString("en-IN")}`}
           additionalContent={
             <div className="mt-2 text-xs text-gray-500 flex items-center">
               <Calendar className="w-3 h-3 mr-1" /> {timeFrameRange.label}
@@ -546,7 +546,7 @@ const IncomePage = () => {
             </div>
           }
           label="Average Income"
-          value={`$${Number(averageIncome || 0).toLocaleString()}`}
+          value={`₹${Number(averageIncome || 0).toLocaleString("en-IN")}`}
           additionalContent={
             <div className="mt-2 text-xs text-gray-500 flex items-center">
               <Calendar className="w-3 h-3 mr-1" /> {transactionsCount}{" "}
@@ -583,7 +583,7 @@ const IncomePage = () => {
       <div className={styles.listContainer}>
         <div className={styles.header}>
           <h3 className={styles.sectionTitle}>
-            <DollarSign className="w-5 h-5 md:w-6 md:h-6 text-green-500" />
+            <IndianRupee className="w-5 h-5 md:w-6 md:h-6 text-green-500" />
             Income Transactions
             <span className="text-sm text-gray-500 font-normal">
               {" "}
@@ -630,7 +630,7 @@ const IncomePage = () => {
           {filteredTransactions.length === 0 && (
             <div className={styles.emptyStateContainer}>
               <div className={styles.emptyStateIcon}>
-                <DollarSign className="w-6 h-6 md:w-8 md:h-8 text-green-400" />
+                <IndianRupee className="w-6 h-6 md:w-8 md:h-8 text-green-400" />
               </div>
               <p className={styles.emptyStateText}>
                 No income transactions found

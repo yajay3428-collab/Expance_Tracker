@@ -12,7 +12,7 @@ import {
   ChevronUp,
   Clock,
   CreditCard,
-  DollarSign,
+  IndianRupee,
   Gift,
   Home,
   Info,
@@ -332,19 +332,19 @@ const Layout = ({ onLogout, user }) => {
               <div>
                 <p className={styles.statCards.cardTitle}>Total Balance</p>
                 <p className={styles.statCards.cardValue}>
-                  $
-                  {stats.allTimeSavings.toLocaleString("en-US", {
+                 ₹
+                  {stats.allTimeSavings.toLocaleString("en-IN", {
                     maximumFractionDigits: 2,
                   })}
                 </p>
               </div>
               <div className={styles.statCards.iconContainer("teal")}>
-                <DollarSign className={styles.statCards.icon("teal")} />
+                <IndianRupee className={styles.statCards.icon("teal")} />
               </div>
             </div>
             <p className={styles.statCards.cardFooter}>
               <span className="text-teal-600 font-medium">
-                +${stats.last30DaysSavings.toLocaleString()}
+                +₹{stats.last30DaysSavings.toLocaleString("en-IN")}
               </span>{" "}
               this month
             </p>
@@ -355,8 +355,8 @@ const Layout = ({ onLogout, user }) => {
               <div>
                 <p className={styles.statCards.cardTitle}>Monthly Income</p>
                 <p className={styles.statCards.cardValue}>
-                  $
-                  {stats.last30DaysIncome.toLocaleString("en-US", {
+                 ₹
+                  {stats.last30DaysIncome.toLocaleString("en-IN", {
                     maximumFractionDigits: 2,
                   })}
                 </p>
@@ -376,8 +376,8 @@ const Layout = ({ onLogout, user }) => {
               <div>
                 <p className={styles.statCards.cardTitle}>Monthly Expense</p>
                 <p className={styles.statCards.cardValue}>
-                  $
-                  {stats.last30DaysExpenses.toLocaleString("en-US", {
+                 ₹
+                  {stats.last30DaysExpenses.toLocaleString("en-IN", {
                     maximumFractionDigits: 2,
                   })}
                 </p>
@@ -470,7 +470,7 @@ const Layout = ({ onLogout, user }) => {
                           )}`}
                         >
                           {CATEGORY_ICONS[category] || (
-                            <DollarSign className={styles.transactions.icon} />
+                            <IndianRupee className={styles.transactions.icon} />
                           )}
                         </div>
 
@@ -486,7 +486,7 @@ const Layout = ({ onLogout, user }) => {
                       </div>
 
                       <span className={styles.colors.transaction.text(type)}>
-                        {type === "income" ? "+" : "-"}${Number(amount)}
+                        {type === "income" ? "+" : "-"}₹{Number(amount)}
                       </span>
                     </div>
                   );
@@ -542,7 +542,7 @@ const Layout = ({ onLogout, user }) => {
                     <div className=" flex item-center gap-3">
                       <div className={styles.categories.categoryIconContainer}>
                         {CATEGORY_ICONS[category] || (
-                          <DollarSign
+                          <IndianRupee
                             className={styles.categories.categoryIcon}
                           />
                         )}
@@ -552,7 +552,7 @@ const Layout = ({ onLogout, user }) => {
                       </span>
                     </div>
                     <span className={styles.categories.categoryAmount}>
-                      ${amount}
+                      ₹{amount}
                     </span>
                   </div>
                 ))}
@@ -565,7 +565,7 @@ const Layout = ({ onLogout, user }) => {
                       Total Income
                     </p>
                     <p className={styles.categories.summaryValue}>
-                      ${stats.allTimeIncome.toLocaleString()}
+                      ₹{stats.allTimeIncome.toLocaleString("en-IN")}
                     </p>
                   </div>
 
@@ -574,7 +574,7 @@ const Layout = ({ onLogout, user }) => {
                       Total Expense
                     </p>
                     <p className={styles.categories.summaryValue}>
-                      ${stats.allTimeExpenses.toLocaleString()}
+                      ₹{stats.allTimeExpenses.toLocaleString("en-IN")}
                     </p>
                   </div>
                 </div>

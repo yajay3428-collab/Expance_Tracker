@@ -22,7 +22,7 @@ import {
   BarChart2,
   ChevronDown,
   ChevronUp,
-  DollarSign,
+  IndianRupee,
   TrendingUp as ProfitIcon,
   PieChart as PieChartIcon,
   PiggyBank,
@@ -481,11 +481,11 @@ const Dashboard = () => {
             </div>
           }
           label="Total Balance"
-          value={`$${Math.round(displayIncome - displayExpenses).toLocaleString()}`}
+          value={`₹${Math.round(displayIncome - displayExpenses).toLocaleString("en-IN")}`}
           additionalContent={
             <div className=" flex items-center gap-2 mt-2 text-sm">
               <span className={dashboardStyles.balanceBadge}>
-                +${Math.round(displayIncome).toLocaleString()}
+                +₹{Math.round(displayIncome).toLocaleString("en-IN")}
               </span>
               <span className={dashboardStyles.expenseBadge}>
                 +{Math.round(displayExpenses).toLocaleString()}
@@ -501,7 +501,7 @@ const Dashboard = () => {
             </div>
           }
           label={`${timeFrameRange.label} Expenses`}
-          value={`$${Math.round(displayExpenses).toLocaleString()}`}
+          value={`₹${Math.round(displayExpenses).toLocaleString("en-IN")}`}
           additionalContent={
             <div
               className={`mt-2 text-xs flex items-center gap-1 ${
@@ -529,7 +529,7 @@ const Dashboard = () => {
             </div>
           }
           label={`${timeFrameRange.label} Savings`}
-          value={`$${Math.round(displaySavings).toLocaleString()}`}
+          value={`₹${Math.round(displaySavings).toLocaleString("en-IN")}`}
           additionalContent={
             <div className="mt-2 text-xs text-cyan-600 flex items-center gap-2">
               <div className="flex items-center gap-1">
@@ -617,7 +617,7 @@ const Dashboard = () => {
               </Pie>
               <Tooltip
                 formatter={(value) => [
-                  `$${Math.round(value).toLocaleString()}`,
+                  `₹${Math.round(value).toLocaleString("en-IN")}`,
                   "Amount",
                 ]}
                 contentStyle={dashboardStyles.tooltipContent}
@@ -681,7 +681,7 @@ const Dashboard = () => {
                   </div>
                   <div className={dashboardStyles.transactionAmount}>
                     <p className={dashboardStyles.incomeAmount}>
-                      +${Math.abs(transaction.amount).toLocaleString()}
+                      +₹{Math.abs(transaction.amount).toLocaleString("en-IN")}
                     </p>
                     <p className={dashboardStyles.transactionDate}>
                       {new Date(transaction.date).toLocaleDateString()}
@@ -696,7 +696,7 @@ const Dashboard = () => {
                 <div
                   className={dashboardStyles.emptyIconContainer("bg-green-50")}
                 >
-                  <DollarSign className="w-8 h-8 text-green-400" />
+                  <IndianRupee className="w-8 h-8 text-green-400" />
                 </div>
                 <p className={dashboardStyles.emptyText}>
                   No income transactions
@@ -767,7 +767,7 @@ const Dashboard = () => {
                   </div>
                   <div className={dashboardStyles.transactionAmount}>
                     <p className={dashboardStyles.expenseAmount}>
-                      -${Math.abs(transaction.amount).toLocaleString()}
+                      -₹{Math.abs(transaction.amount).toLocaleString("en-IN")}
                     </p>
                     <p className={dashboardStyles.transactionDate}>
                       {new Date(transaction.date).toLocaleDateString()}
