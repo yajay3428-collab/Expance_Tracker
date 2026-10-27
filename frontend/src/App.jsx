@@ -10,6 +10,7 @@ import Layout from "./Components/Layout";
 import Dashboard from "./Pages/Dashboard";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
+import ThemeToggle from "./Components/ThemeToggle";
 import axios from "axios";
 import { INCOME_CATEGORY_ICONS } from "./assets/color";
 import Income from "./Pages/Income";
@@ -205,9 +206,25 @@ const App = () => {
       <ScrollToTop />
 
       <Routes>
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route
+          path="/login"
+          element={
+            <>
+              <ThemeToggle floating />
+              <Login onLogin={handleLogin} />
+            </>
+          }
+        />
 
-        <Route path="/signup" element={<Signup onSignup={handleSignup} />} />
+        <Route
+          path="/signup"
+          element={
+            <>
+              <ThemeToggle floating />
+              <Signup onSignup={handleSignup} />
+            </>
+          }
+        />
 
         {/* Protected routes share Layout and Outlet context */}
         <Route

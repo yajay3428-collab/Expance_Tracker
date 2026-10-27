@@ -59,3 +59,103 @@
   font-weight: 400;
   font-style: normal;
 }
+
+
+/* =====================================================================
+   Dark theme  (toggled by adding the "dark" class on <html>)
+   Tailwind v4 reads colours from --color-* variables, so re-mapping the
+   neutral scale + the light tints here re-themes every existing class.
+   ===================================================================== */
+html.dark {
+  color-scheme: dark;
+
+  /* neutral scale: light -> dark, text shades -> light */
+  --color-gray-50: #0f172a;
+  --color-gray-100: #2a384e;
+  --color-gray-200: #334155;
+  --color-gray-300: #475569;
+  --color-gray-400: #64748b;
+  --color-gray-500: #8391a7;
+  --color-gray-600: #a3b1c6;
+  --color-gray-700: #cbd5e1;
+  --color-gray-800: #e2e8f0;
+  --color-gray-900: #f1f5f9;
+
+  /* light tints (badges, soft backgrounds) -> dark tints */
+  --color-teal-50: color-mix(in srgb, #14b8a6 12%, #131c2e);
+  --color-teal-100: color-mix(in srgb, #14b8a6 20%, #1e293b);
+  --color-teal-200: color-mix(in srgb, #14b8a6 30%, #1e293b);
+  --color-orange-50: color-mix(in srgb, #f97316 12%, #131c2e);
+  --color-orange-100: color-mix(in srgb, #f97316 20%, #1e293b);
+  --color-orange-200: color-mix(in srgb, #f97316 30%, #1e293b);
+  --color-cyan-50: color-mix(in srgb, #06b6d4 12%, #131c2e);
+  --color-cyan-100: color-mix(in srgb, #06b6d4 20%, #1e293b);
+  --color-cyan-200: color-mix(in srgb, #06b6d4 30%, #1e293b);
+  --color-green-50: color-mix(in srgb, #22c55e 12%, #131c2e);
+  --color-green-100: color-mix(in srgb, #22c55e 20%, #1e293b);
+  --color-green-200: color-mix(in srgb, #22c55e 30%, #1e293b);
+  --color-red-50: color-mix(in srgb, #ef4444 12%, #131c2e);
+  --color-red-100: color-mix(in srgb, #ef4444 20%, #1e293b);
+  --color-red-200: color-mix(in srgb, #ef4444 30%, #1e293b);
+  --color-emerald-50: color-mix(in srgb, #10b981 12%, #131c2e);
+  --color-emerald-100: color-mix(in srgb, #10b981 20%, #1e293b);
+  --color-emerald-200: color-mix(in srgb, #10b981 30%, #1e293b);
+  --color-purple-50: color-mix(in srgb, #a855f7 12%, #131c2e);
+  --color-purple-100: color-mix(in srgb, #a855f7 20%, #1e293b);
+  --color-purple-200: color-mix(in srgb, #a855f7 30%, #1e293b);
+  --color-amber-50: color-mix(in srgb, #f59e0b 12%, #131c2e);
+  --color-amber-100: color-mix(in srgb, #f59e0b 20%, #1e293b);
+  --color-amber-200: color-mix(in srgb, #f59e0b 30%, #1e293b);
+  --color-yellow-50: color-mix(in srgb, #eab308 12%, #131c2e);
+  --color-yellow-100: color-mix(in srgb, #eab308 20%, #1e293b);
+  --color-yellow-200: color-mix(in srgb, #eab308 30%, #1e293b);
+  --color-blue-50: color-mix(in srgb, #3b82f6 12%, #131c2e);
+  --color-blue-100: color-mix(in srgb, #3b82f6 20%, #1e293b);
+  --color-blue-200: color-mix(in srgb, #3b82f6 30%, #1e293b);
+}
+
+html.dark body {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+/* surfaces */
+html.dark .bg-white { background-color: #1e293b; }
+html.dark .border-white { border-color: #1e293b; }
+html.dark .hover\:bg-gray-50:hover { background-color: #2a384e; }
+html.dark .hover\:bg-gray-100:hover { background-color: #334155; }
+
+/* text that sits on light tints / coloured headers */
+html.dark .text-teal-100 { color: #ccfbf1; }
+html.dark .text-teal-700,
+html.dark .text-teal-800 { color: #5eead4; }
+html.dark .hover\:text-teal-700:hover { color: #99f6e4; }
+html.dark .text-red-700 { color: #fca5a5; }
+html.dark .text-green-800 { color: #86efac; }
+html.dark .text-orange-800 { color: #fdba74; }
+html.dark .to-cyan-700 { --tw-gradient-to: #22d3ee; }
+
+/* form controls */
+html.dark input,
+html.dark select,
+html.dark textarea { color: #e2e8f0; }
+html.dark ::placeholder { color: #64748b; opacity: 1; }
+
+/* modal + scrollbars */
+html.dark .modal { background: #1e293b; color: #e2e8f0; }
+html.dark .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
+html.dark .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.18); }
+html.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.28); }
+
+/* recharts */
+html.dark .recharts-cartesian-grid line { stroke: #334155; }
+html.dark .recharts-cartesian-axis-tick-value { fill: #94a3b8; }
+html.dark .recharts-cartesian-axis-line,
+html.dark .recharts-cartesian-axis-tick-line { stroke: #475569; }
+html.dark .recharts-radial-bar-background-sector { fill: #334155; }
+html.dark .recharts-default-tooltip {
+  background-color: rgba(30, 41, 59, 0.96) !important;
+  border-color: #334155 !important;
+}
+html.dark .recharts-tooltip-label { color: #e2e8f0 !important; }
+html.dark .recharts-legend-item-text { color: #cbd5e1 !important; }

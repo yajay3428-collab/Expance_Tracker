@@ -1,3 +1,4 @@
+import ThemeToggle from "./ThemeToggle";
 import React, { useEffect } from "react";
 import { navbarStyles } from "../assets/dummyStyles";
 import img1 from "../assets/logo.png";
@@ -74,6 +75,8 @@ const Navbar = ({ user: propUser, onLogout }) => {
           </div>
           <span className={navbarStyles.logoText}>Expense Tracker</span>
         </div>
+        <div className="flex items-center gap-2">
+        <ThemeToggle />
         {/* if the user is present */}
         {user && (
           <div className={navbarStyles.userContainer} ref={menuRef}>
@@ -135,6 +138,7 @@ const Navbar = ({ user: propUser, onLogout }) => {
             )}
           </div>
         )}
+        </div>
       </div>
     </header>
   );
